@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Burs Başvuru Kontrol - Öğrenci Burs Yönetim Sistemi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Burs Yönetim Sistemi</h1>
+    <p>Burs başvuru durumu sorgulama</p>
+</header>
+
+<nav class="nav-menu">
+    <a href="burs-kayit.html" class="nav-link">Burs Kaydı</a>
+    <a href="basvuru-kontrol.html" class="nav-link active">Burs Başvuru Kontrol</a>
+    <a href="bursiyer-kayit.html" class="nav-link">Bursiyer Kaydı</a>
+</nav>
+
+<div class="container">
+    <div class="card">
+        <h2 class="section-title">Başvuru Durumu Sorgula</h2>
+        <p class="section-desc">TC Kimlik No veya E-posta adresiniz ile başvuru durumunuzu öğrenebilirsiniz.</p>
+        
+        <form id="sorguForm">
+            <div class="form-grid" style="grid-template-columns: 1fr;">
+                <div class="form-grup">
+                    <label for="tcKimlikNo">TC Kimlik No</label>
+                    <input type="text" id="tcKimlikNo" placeholder="11 haneli TC Kimlik No" maxlength="11" />
+                </div>
+                <div style="text-align: center; margin: 10px 0; color: var(--muted);">VEYA</div>
+                <div class="form-grup">
+                    <label for="email">E-posta Adresi</label>
+                    <input type="email" id="email" placeholder="ornek@email.com" />
+                </div>
+                <div class="form-grup">
+                    <button type="submit">Sorgula</button>
+                </div>
+            </div>
+            <div id="mesaj" class="mesaj"></div>
+        </form>
+    </div>
+
+    <div id="sonucCard" class="card" style="display: none;">
+        <h2 class="section-title">Öğrenci Bilgileri</h2>
+        <div id="ogrenciBilgileri" class="info-box"></div>
+        
+        <div id="bursDurumuAlani"></div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("sorguForm");
+    const mesajDiv = document.getElementById("mesaj");
+    const sonucCard = document.getElementById("sonucCard");
+    const ogrenciBilgileri = document.getElementById("ogrenciBilgileri");
+    const bursDurumuAlani = document.getElementById("bursDurumuAlani");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        mesajDiv.textContent = "";
+        mesajDiv.className = "mesaj";
+        sonucCard.style.display = "none";
+
+        const tcKimlikNo = document.getElementById("tcKimlikNo").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        if (!tcKimlikNo && !email) {
+            mesajDiv.textContent = "Lütfen TC Kimlik No veya E-posta adresi giriniz.";
+            mesajDiv.classList.add("hata");
+            return;
+        }
+
+        try {
+            const params = new URLSearchParams();
+            if (tcKimlikNo) params.append("tcKimlikNo", tcKimlikNo);
+            if (email) params.append("email", email);
+
+            const response = await fetch(`/api/ogrenciler/sorgula?${params.toString()}`);
+
+            if (response.status === 404) {
+                mesajDiv.textContent = "Kayıt bulunamadı. Lütfen bilgilerinizi kontrol ediniz.";
+                mesajDiv.classList.add("hata");
+                return;
+            }
+
+            if (!response.ok) {
+                const error = await response.json();
+                mesajDiv.textContent = error.message || "Bir hata oluştu.";
+                mesajDiv.classList.add("hata");
+                return;
+            }
+
+            const data = await response.json();
+            sonucCard.style.display = "block";
+
+            // Öğrenci bilgilerini göster
+            const ogrenci = data.ogrenci;
+            ogrenciBilgileri.innerHTML = `
+                <h3>Kişisel Bilgiler</h3>
+                <div class="info-item">
+                    <span class="info-label">Ad Soyad:</span>
+                    <span class="info-value">${ogrenci.ad} ${ogrenci.soyad}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">TC Kimlik No:</span>
+                    <span class="info-value">${ogrenci.tcKimlikNo}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">E-posta:</span>
+                    <span class="info-value">${ogrenci.email || '-'}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Telefon:</span>
+                    <span class="info-value">${ogrenci.telefon || '-'}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Yaş:</span>
+                    <span class="info-value">${ogrenci.yas}</span>
+                </div>
+                <h3 style="margin-top: 20px;">Eğitim Bilgileri</h3>
+                <div class="info-item">
+                    <span class="info-label">Üniversite:</span>
+                    <span class="info-value">${ogrenci.universite}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Bölüm:</span>
+                    <span class="info-value">${ogrenci.bolum}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Sınıf:</span>
+                    <span class="info-value">${ogrenci.sinif}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">AGNO:</span>
+                    <span class="info-value">${ogrenci.agno.toFixed(2)}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Puan:</span>
+                    <span class="info-value"><strong>${ogrenci.puan}</strong></span>
+                </div>
+            `;
+
+            // Burs durumunu göster
+            if (data.bursVarMi && data.bursDurumu) {
+                const burs = data.bursDurumu;
+                const formatDate = (dateStr) => {
+                    if (!dateStr) return '-';
+                    const date = new Date(dateStr);
+                    return date.toLocaleDateString('tr-TR');
+                };
+
+                bursDurumuAlani.innerHTML = `
+                    <div class="burs-detay">
+                        <h3>Burs Bilgileri</h3>
+                        <div class="info-item">
+                            <span class="info-label">Burs Adı:</span>
+                            <span class="info-value"><strong>${burs.bursAdi}</strong></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Burs Tipi:</span>
+                            <span class="info-value">${burs.bursTipi || '-'}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Aylık Tutar:</span>
+                            <span class="info-value"><strong>${burs.aylikTutar.toLocaleString('tr-TR')} TL</strong></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Ödeme Periyodu:</span>
+                            <span class="info-value">${burs.odemePeriyodu || 'Aylık'}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Başlangıç Tarihi:</span>
+                            <span class="info-value">${formatDate(burs.baslangicTarihi)}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Bitiş Tarihi:</span>
+                            <span class="info-value">${formatDate(burs.bitisTarihi)}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Toplam Ödenen:</span>
+                            <span class="info-value"><strong style="color: var(--primary);">${burs.toplamOdenenTutar.toLocaleString('tr-TR')} TL</strong></span>
+                        </div>
+                        ${burs.aciklama ? `
+                        <div style="margin-top: 15px;">
+                            <span class="info-label">Açıklama:</span>
+                            <p style="color: var(--muted); margin-top: 5px;">${burs.aciklama}</p>
+                        </div>
+                        ` : ''}
+                        ${burs.kosullar ? `
+                        <div style="margin-top: 15px;">
+                            <span class="info-label">Burs Koşulları:</span>
+                            <p style="color: var(--muted); margin-top: 5px;">${burs.kosullar}</p>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+            } else {
+                bursDurumuAlani.innerHTML = `
+                    <div class="burs-yok">
+                        Henüz bir burs programına yerleştirilmediniz.
+                    </div>
+                `;
+            }
+
+            mesajDiv.textContent = "Sorgulama başarılı.";
+            mesajDiv.classList.add("basarili");
+        } catch (err) {
+            console.error(err);
+            mesajDiv.textContent = "Sunucuya ulaşılamadı. Lütfen tekrar deneyiniz.";
+            mesajDiv.classList.add("hata");
+        }
+    });
+</script>
+</body>
+</html>
+

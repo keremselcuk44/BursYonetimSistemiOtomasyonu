@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "6g3DN5YdHp8=",
+  "success": true,
+  "projectFilePath": "D:\\OgrenciBursOtomasyonu\\tools\\DiagramRenderer\\DiagramRenderer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kerem\\.nuget\\packages\\skiasharp\\2.88.8\\skiasharp.2.88.8.nupkg.sha512",
+    "C:\\Users\\kerem\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.8\\skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+    "C:\\Users\\kerem\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.8\\skiasharp.nativeassets.win32.2.88.8.nupkg.sha512"
+  ],
+  "logs": []
+}

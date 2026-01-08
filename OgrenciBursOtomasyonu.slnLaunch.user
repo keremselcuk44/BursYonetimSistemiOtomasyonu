@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "OgrenciBursOtomasyonu.Api\\OgrenciBursOtomasyonu.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Path": "OgrenciBursOtomasyonu.Desktop\\OgrenciBursOtomasyonu.Desktop.csproj",
+        "Action": "Start",
+        "DebugTarget": "OgrenciBursOtomasyonu.Desktop"
+      }
+    ]
+  }
+]

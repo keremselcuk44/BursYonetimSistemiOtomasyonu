@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Burs Kaydı - Öğrenci Burs Başvuru Formu</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Burs Yönetim Sistemi</h1>
+    <p>Öğrenci burs başvuru formu</p>
+</header>
+
+<nav class="nav-menu">
+    <a href="burs-kayit.html" class="nav-link active">Burs Kaydı</a>
+    <a href="basvuru-kontrol.html" class="nav-link">Burs Başvuru Kontrol</a>
+    <a href="bursiyer-kayit.html" class="nav-link">Bursiyer Kaydı</a>
+</nav>
+
+<div class="container">
+    <form id="bursForm">
+        <div class="card">
+            <h2 class="section-title">Kişisel Bilgiler</h2>
+            <p class="section-desc">Temel kimlik ve iletişim bilgilerinizi girin.</p>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="form-grup">
+                    <label for="tcKimlikNo">TC Kimlik No <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="tcKimlikNo" placeholder="11 haneli TC" maxlength="11" required />
+                </div>
+                <div class="form-grup">
+                    <label for="ad">Ad <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="ad" placeholder="Adınız" required />
+                </div>
+                <div class="form-grup">
+                    <label for="soyad">Soyad <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="soyad" placeholder="Soyadınız" required />
+                </div>
+                <div class="form-grup">
+                    <label for="yas">Yaş <span style="color: #dc3545;">*</span></label>
+                    <input type="number" id="yas" min="15" max="80" placeholder="Örn: 21" required />
+                </div>
+                <div class="form-grup">
+                    <label for="email">E-posta Adresi <span style="color: #dc3545;">*</span></label>
+                    <input type="email" id="email" placeholder="ornek@email.com" required 
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                           title="Geçerli bir e-posta adresi giriniz" />
+                </div>
+                <div class="form-grup">
+                    <label for="telefon">Telefon Numarası <span style="color: #dc3545;">*</span></label>
+                    <input type="tel" id="telefon" placeholder="05XX XXX XX XX" pattern="[0-9]{10,11}" 
+                           title="10 veya 11 haneli telefon numarası giriniz" required />
+                </div>
+                <div class="form-grup">
+                    <label for="kardesSayisi">Kardeş Sayısı <span style="color: #dc3545;">*</span></label>
+                    <input type="number" id="kardesSayisi" min="0" placeholder="0" required />
+                </div>
+                <div class="form-grup">
+                    <label for="resim">Profil Fotoğrafı</label>
+                    <input type="file" id="resim" accept="image/*" />
+                    <small>(Opsiyonel - JPG, PNG, maksimum 5MB)</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Eğitim Bilgileri</h2>
+            <p class="section-desc">Üniversite ve bölüm bilgilerinizi girin.</p>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="form-grup">
+                    <label for="universite">Üniversite <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="universite" placeholder="Üniversite adı" required />
+                </div>
+                <div class="form-grup">
+                    <label for="bolum">Bölüm <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="bolum" placeholder="Bölüm adı" required />
+                </div>
+                <div class="form-grup">
+                    <label for="sinif">Sınıf <span style="color: #dc3545;">*</span></label>
+                    <select id="sinif" required>
+                        <option value="">Seçiniz</option>
+                        <option value="Hazırlık">Hazırlık</option>
+                        <option value="1">1. Sınıf</option>
+                        <option value="2">2. Sınıf</option>
+                        <option value="3">3. Sınıf</option>
+                        <option value="4">4. Sınıf</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Akademik ve Finansal</h2>
+            <div class="form-grid">
+                <div class="form-grup">
+                    <label for="agno">AGNO (0.00 - 4.00)</label>
+                    <input type="number" id="agno" min="0" max="4" step="0.01" placeholder="Örn: 3.20" required />
+                </div>
+                <div class="form-grup">
+                    <label for="haneGeliri">Hane Geliri (Aylık, TL)</label>
+                    <input type="number" id="haneGeliri" min="0" step="100" placeholder="Örn: 15000" required />
+                </div>
+                <div class="form-grup">
+                    <label for="iban">IBAN</label>
+                    <input type="text" id="iban" placeholder="TR00 0000 0000 0000 0000 0000 00" maxlength="34" required 
+                           pattern="[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{7}([A-Z0-9]?){0,16}" 
+                           title="Geçerli bir IBAN formatı giriniz (örn: TR330006100519786457841326)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Klasik Sorular</h2>
+            <div class="form-grup">
+                <label for="bursAlmaIhtiyaci">Burs alma ihtiyacını kısaca açıklar mısın?</label>
+                <textarea id="bursAlmaIhtiyaci" required></textarea>
+            </div>
+            <div class="form-grup">
+                <label for="egitimMasraflari">Eğitim masraflarını şu ana kadar nasıl karşıladın?</label>
+                <textarea id="egitimMasraflari" required></textarea>
+            </div>
+            <div class="form-grup">
+                <label for="akademikGelisim">Kendini akademik olarak geliştirmek için neler yapıyorsun?</label>
+                <textarea id="akademikGelisim" required></textarea>
+            </div>
+            <div class="form-grup">
+                <label for="toplumaKatki">Aldığın eğitimin topluma nasıl katkı sağlayacağını düşünüyorsun?</label>
+                <textarea id="toplumaKatki" required></textarea>
+            </div>
+            <div class="form-grup">
+                <label for="besYilSonrasi">Kendini 5 yıl sonra nerede görüyorsun?</label>
+                <textarea id="besYilSonrasi" required></textarea>
+            </div>
+        </div>
+
+        <div class="card" style="text-align:center;">
+            <button type="submit">Başvuruyu Gönder</button>
+            <div id="mesaj" class="mesaj"></div>
+        </div>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("bursForm");
+    const mesajDiv = document.getElementById("mesaj");
+
+    // Resmi base64'e çeviren fonksiyon
+    function resmiBase64eCevir(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        mesajDiv.textContent = "";
+        mesajDiv.className = "mesaj";
+
+        // Resim dosyasını base64'e çevir
+        let resimBase64 = "";
+        const resimDosyasi = document.getElementById("resim").files[0];
+        if (resimDosyasi) {
+            try {
+                resimBase64 = await resmiBase64eCevir(resimDosyasi);
+            } catch (err) {
+                mesajDiv.textContent = "Resim yüklenirken hata oluştu.";
+                mesajDiv.classList.add("hata");
+                return;
+            }
+        }
+
+        const veri = {
+            tcKimlikNo: document.getElementById("tcKimlikNo").value,
+            ad: document.getElementById("ad").value,
+            soyad: document.getElementById("soyad").value,
+            universite: document.getElementById("universite").value,
+            bolum: document.getElementById("bolum").value,
+            sinif: document.getElementById("sinif").value,
+            agno: Number(document.getElementById("agno").value),
+            kardesSayisi: Number(document.getElementById("kardesSayisi").value),
+            haneGeliri: Number(document.getElementById("haneGeliri").value),
+            email: document.getElementById("email").value.trim(),
+            telefon: document.getElementById("telefon").value,
+            yas: Number(document.getElementById("yas").value),
+            iban: document.getElementById("iban").value.replace(/\s/g, ""), // Boşlukları kaldır
+            resimYolu: resimBase64, // Base64 string olarak saklanacak
+            bursAlmaIhtiyaci: document.getElementById("bursAlmaIhtiyaci").value,
+            egitimMasraflari: document.getElementById("egitimMasraflari").value,
+            akademikGelisim: document.getElementById("akademikGelisim").value,
+            toplumaKatki: document.getElementById("toplumaKatki").value,
+            besYilSonrasi: document.getElementById("besYilSonrasi").value
+        };
+
+        try {
+            const response = await fetch("/api/ogrenciler", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(veri)
+            });
+
+            if (response.ok) {
+                mesajDiv.textContent = "Başvurunuz başarıyla alınmıştır.";
+                mesajDiv.classList.add("basarili");
+                form.reset();
+            } else {
+                mesajDiv.textContent = "Bir hata oluştu. Lütfen tekrar deneyiniz.";
+                mesajDiv.classList.add("hata");
+            }
+        } catch (err) {
+            console.error(err);
+            mesajDiv.textContent = "Sunucuya ulaşılamadı.";
+            mesajDiv.classList.add("hata");
+        }
+    });
+</script>
+</body>
+</html>
+

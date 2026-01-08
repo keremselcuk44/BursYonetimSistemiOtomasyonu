@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ActiveDebugProfile>OgrenciBursOtomasyonu.Desktop</ActiveDebugProfile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Controls\GridViewWithButtons.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="FrmBursAlanOgrenciler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmBursEslestir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmBursListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmBursTanimla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmGiris.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmKullaniciIslemleri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmOgrenciDetay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmOgrenciDuzenle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmOgrenciDuzenleListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmOgrenciListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Burs\BursFilterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Common\BaseCustomFilterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Common\BaseFilterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Common\BaseViewWithWinUIButtons.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Common\FilterCollectionViewBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Dashboard\DashboardView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Kullanici\KullaniciIslemleriView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Ogrenci\OgrenciCollectionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Views\Ogrenci\OgrenciFilterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\bin\Release\net9.0\ReportExporter.exe
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\bin\Release\net9.0\ReportExporter.deps.json
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\bin\Release\net9.0\ReportExporter.runtimeconfig.json
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\bin\Release\net9.0\ReportExporter.dll
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\bin\Release\net9.0\ReportExporter.pdb
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\bin\Release\net9.0\Markdig.dll
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.csproj.AssemblyReference.cache
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.GeneratedMSBuildEditorConfig.editorconfig
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.AssemblyInfoInputs.cache
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.AssemblyInfo.cs
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.csproj.CoreCompileInputs.cache
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportEx.AA941626.Up2Date
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.dll
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\refint\ReportExporter.dll
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.pdb
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ReportExporter.genruntimeconfig.cache
+D:\OgrenciBursOtomasyonu\tools\ReportExporter\obj\Release\net9.0\ref\ReportExporter.dll

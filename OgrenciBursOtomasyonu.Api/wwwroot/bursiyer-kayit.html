@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bursiyer Kaydı - Öğrenci Burs Yönetim Sistemi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Burs Yönetim Sistemi</h1>
+    <p>Bursiyer kayıt formu</p>
+</header>
+
+<nav class="nav-menu">
+    <a href="burs-kayit.html" class="nav-link">Burs Kaydı</a>
+    <a href="basvuru-kontrol.html" class="nav-link">Burs Başvuru Kontrol</a>
+    <a href="bursiyer-kayit.html" class="nav-link active">Bursiyer Kaydı</a>
+</nav>
+
+<div class="container">
+    <form id="bursiyerForm">
+        <div class="card">
+            <h2 class="section-title">Temel Burs Bilgileri</h2>
+            <p class="section-desc">Bursun temel bilgilerini girin.</p>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="form-grup" style="grid-column: 1 / -1;">
+                    <label for="bursAdi">Burs Adı <span style="color: #dc3545;">*</span></label>
+                    <input type="text" id="bursAdi" placeholder="Örn: Başarı Bursu, İhtiyaç Bursu" required />
+                </div>
+                <div class="form-grup">
+                    <label for="bursTipi">Burs Tipi</label>
+                    <select id="bursTipi">
+                        <option value="">Seçiniz</option>
+                        <option value="Temel">Temel</option>
+                        <option value="Yüksek Lisans">Yüksek Lisans</option>
+                        <option value="Doktora">Doktora</option>
+                        <option value="Özel">Özel</option>
+                        <option value="Spor">Spor</option>
+                        <option value="Sanat">Sanat</option>
+                        <option value="Başarı">Başarı</option>
+                        <option value="İhtiyaç">İhtiyaç</option>
+                        <option value="Diğer">Diğer</option>
+                    </select>
+                </div>
+                <div class="form-grup">
+                    <label for="minimumPuan">Minimum Puan <span style="color: #dc3545;">*</span></label>
+                    <input type="number" id="minimumPuan" min="0" max="100" placeholder="0-100" required />
+                </div>
+                <div class="form-grup">
+                    <label for="kontenjan">Kontenjan <span style="color: #dc3545;">*</span></label>
+                    <input type="number" id="kontenjan" min="1" placeholder="Örn: 50" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Mali Bilgiler</h2>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="form-grup">
+                    <label for="aylikTutar">Aylık Tutar (TL) <span style="color: #dc3545;">*</span></label>
+                    <input type="number" id="aylikTutar" min="0" step="0.01" placeholder="Örn: 5000.00" required />
+                </div>
+                <div class="form-grup">
+                    <label for="odemePeriyodu">Ödeme Periyodu</label>
+                    <select id="odemePeriyodu">
+                        <option value="Aylık" selected>Aylık</option>
+                        <option value="Dönemlik">Dönemlik</option>
+                        <option value="Yıllık">Yıllık</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Tarih Bilgileri</h2>
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="form-grup">
+                    <label for="baslangicTarihi">Başlangıç Tarihi</label>
+                    <input type="date" id="baslangicTarihi" />
+                </div>
+                <div class="form-grup">
+                    <label for="bitisTarihi">Bitiş Tarihi</label>
+                    <input type="date" id="bitisTarihi" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Açıklama ve Koşullar</h2>
+            <div class="form-grup">
+                <label for="aciklama">Burs Açıklaması</label>
+                <textarea id="aciklama" placeholder="Burs hakkında detaylı açıklama..." style="min-height: 100px;"></textarea>
+            </div>
+            <div class="form-grup">
+                <label for="kosullar">Burs Koşulları</label>
+                <textarea id="kosullar" placeholder="Burs koşulları ve gereksinimler..." style="min-height: 100px;"></textarea>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Durum</h2>
+            <div class="form-grup">
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="aktifMi" checked style="width: 20px; height: 20px; cursor: pointer;" />
+                    <span>Burs aktif</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="card" style="text-align:center;">
+            <button type="submit">Burs Kaydı Oluştur</button>
+            <div id="mesaj" class="mesaj"></div>
+        </div>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("bursiyerForm");
+    const mesajDiv = document.getElementById("mesaj");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        mesajDiv.textContent = "";
+        mesajDiv.className = "mesaj";
+
+        const veri = {
+            bursAdi: document.getElementById("bursAdi").value.trim(),
+            bursTipi: document.getElementById("bursTipi").value || "",
+            minimumPuan: parseInt(document.getElementById("minimumPuan").value),
+            kontenjan: parseInt(document.getElementById("kontenjan").value),
+            aylikTutar: parseFloat(document.getElementById("aylikTutar").value),
+            odemePeriyodu: document.getElementById("odemePeriyodu").value || "Aylık",
+            baslangicTarihi: document.getElementById("baslangicTarihi").value || null,
+            bitisTarihi: document.getElementById("bitisTarihi").value || null,
+            aktifMi: document.getElementById("aktifMi").checked,
+            aciklama: document.getElementById("aciklama").value.trim(),
+            kosullar: document.getElementById("kosullar").value.trim()
+        };
+
+        // Validasyon
+        if (!veri.bursAdi) {
+            mesajDiv.textContent = "Burs adı zorunludur.";
+            mesajDiv.classList.add("hata");
+            return;
+        }
+
+        if (veri.minimumPuan < 0 || veri.minimumPuan > 100) {
+            mesajDiv.textContent = "Minimum puan 0-100 arası olmalıdır.";
+            mesajDiv.classList.add("hata");
+            return;
+        }
+
+        if (veri.kontenjan < 1) {
+            mesajDiv.textContent = "Kontenjan en az 1 olmalıdır.";
+            mesajDiv.classList.add("hata");
+            return;
+        }
+
+        if (veri.aylikTutar < 0) {
+            mesajDiv.textContent = "Aylık tutar 0'dan küçük olamaz.";
+            mesajDiv.classList.add("hata");
+            return;
+        }
+
+        try {
+            const response = await fetch("/api/burslar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(veri)
+            });
+
+            if (response.ok) {
+                mesajDiv.textContent = "Burs kaydı başarıyla oluşturulmuştur.";
+                mesajDiv.classList.add("basarili");
+                form.reset();
+                document.getElementById("aktifMi").checked = true;
+                document.getElementById("odemePeriyodu").value = "Aylık";
+            } else {
+                const error = await response.json();
+                mesajDiv.textContent = error.message || "Bir hata oluştu. Lütfen tekrar deneyiniz.";
+                mesajDiv.classList.add("hata");
+            }
+        } catch (err) {
+            console.error(err);
+            mesajDiv.textContent = "Sunucuya ulaşılamadı.";
+            mesajDiv.classList.add("hata");
+        }
+    });
+</script>
+</body>
+</html>
+

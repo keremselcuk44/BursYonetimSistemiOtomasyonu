@@ -1,0 +1,2 @@
+D:\OgrenciBursOtomasyonu\OgrenciBursOtomasyonu.Api\wwwroot\components\navbar.js
+D:\OgrenciBursOtomasyonu\OgrenciBursOtomasyonu.Api\wwwroot\script.js
